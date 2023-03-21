@@ -33,10 +33,6 @@ let speedX;
 let trajectoryX;
 let computerSpeed;
 
-//obstacles
-const obsTopHeight = height / 4;
-const obsBottomHeight = (height * 3) / 4;
-
 // Change Mobile Settings
 if (isMobile.matches) {
   speedY = -2;
@@ -85,18 +81,18 @@ function renderCanvas() {
   context.fillText(computerScore, 20, canvas.height / 2 - 30);
   // Obstacle Top
   context.fillStyle = "gray";
-  context.fillRect(width / 4 - 10, obsTopHeight, 20, 20);
+  context.fillRect(width / 4 - 10, height / 4, 20, 20);
   context.fillStyle = "gray";
-  context.fillRect((width * 2) / 4 - 10, obsTopHeight, 20, 20);
+  context.fillRect((width * 2) / 4 - 10, height / 4, 20, 20);
   context.fillStyle = "gray";
-  context.fillRect((width * 3) / 4 - 10, obsTopHeight, 20, 20);
+  context.fillRect((width * 3) / 4 - 10, height / 4, 20, 20);
   // Obstacle Bottom
   context.fillStyle = "gray";
-  context.fillRect(width / 4 - 10, obsBottomHeight, 20, 20);
+  context.fillRect(width / 4 - 10, (height * 3) / 4, 20, 20);
   context.fillStyle = "gray";
-  context.fillRect((width * 2) / 4 - 10, obsBottomHeight, 20, 20);
+  context.fillRect((width * 2) / 4 - 10, (height * 3) / 4, 20, 20);
   context.fillStyle = "gray";
-  context.fillRect((width * 3) / 4 - 10, obsBottomHeight, 20, 20);
+  context.fillRect((width * 3) / 4 - 10, (height * 3) / 4, 20, 20);
 }
 
 // Create Canvas Element
@@ -176,7 +172,6 @@ function ballBoundaries() {
       playerScore++;
     }
   }
-  // Bounce off obstacles Top
 }
 
 // Computer Movement
@@ -257,19 +252,7 @@ function startGame() {
     // Hide Cursor
     canvas.style.cursor = "none";
   });
-
-  document.addEventListener("keydown", keyDownHandler);
-  function keyDownHandler(e) {
-    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-      playerMoved = true;
-
-      if (e.key === "ArrowLeft") {
-        paddleBottomX += -10;
-      } else if (e.key === "ArrowRight") {
-        paddleBottomX += 10;
-      }
-    }
-  }
 }
+
 // On Load
 startGame();
