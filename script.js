@@ -115,7 +115,7 @@ function ballBoundaries() {
     speedX = -speedX;
   }
   // Bounce off Right Wall
-  if (ballX > width && speedX > 0) {
+  if (ballX >= width && speedX > 0) {
     speedX = -speedX;
   }
   // Bounce off player paddle (bottom)
@@ -238,6 +238,20 @@ function startGame() {
     // Hide Cursor
     canvas.style.cursor = "none";
   });
+
+  //keyboard controls
+  document.addEventListener("keydown", keyDownHandler);
+  function keyDownHandler(e) {
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+      playerMoved = true;
+
+      if (e.key === "ArrowLeft") {
+        paddleBottomX += -15;
+      } else if (e.key === "ArrowRight") {
+        paddleBottomX += 15;
+      }
+    }
+  }
 }
 
 // On Load
