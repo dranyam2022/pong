@@ -79,20 +79,6 @@ function renderCanvas() {
   context.font = "32px Courier New";
   context.fillText(playerScore, 20, canvas.height / 2 + 50);
   context.fillText(computerScore, 20, canvas.height / 2 - 30);
-  // Obstacle Top
-  context.fillStyle = "gray";
-  context.fillRect(width / 4 - 10, height / 4, 20, 20);
-  context.fillStyle = "gray";
-  context.fillRect((width * 2) / 4 - 10, height / 4, 20, 20);
-  context.fillStyle = "gray";
-  context.fillRect((width * 3) / 4 - 10, height / 4, 20, 20);
-  // Obstacle Bottom
-  context.fillStyle = "gray";
-  context.fillRect(width / 4 - 10, (height * 3) / 4, 20, 20);
-  context.fillStyle = "gray";
-  context.fillRect((width * 2) / 4 - 10, (height * 3) / 4, 20, 20);
-  context.fillStyle = "gray";
-  context.fillRect((width * 3) / 4 - 10, (height * 3) / 4, 20, 20);
 }
 
 // Create Canvas Element
