@@ -51,7 +51,7 @@ if (isMobile.matches) {
 // Score
 let playerScore = 0;
 let computerScore = 0;
-const winningScore = Infinity;
+const winningScore = 7;
 let isGameOver = true;
 let isNewGame = true;
 
@@ -115,7 +115,7 @@ function ballMove() {
 // Determine What Ball Bounces Off, Score Points, Reset Ball
 function ballBoundaries() {
   // Bounce off Left Wall
-  if (ballX <= 0 && speedX < 0) {
+  if (ballX < 0 && speedX < 0) {
     speedX = -speedX;
   }
   // Bounce off Right Wall
