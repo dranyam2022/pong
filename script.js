@@ -83,20 +83,6 @@ function renderCanvas() {
   context.font = "32px Courier New";
   context.fillText(playerScore, 20, canvas.height / 2 + 50);
   context.fillText(computerScore, 20, canvas.height / 2 - 30);
-  // Obstacle Top
-  context.fillStyle = "gray";
-  context.fillRect(width / 4 - 10, obsTopHeight, 20, 20);
-  context.fillStyle = "gray";
-  context.fillRect((width * 2) / 4 - 10, obsTopHeight, 20, 20);
-  context.fillStyle = "gray";
-  context.fillRect((width * 3) / 4 - 10, obsTopHeight, 20, 20);
-  // Obstacle Bottom
-  context.fillStyle = "gray";
-  context.fillRect(width / 4 - 10, obsBottomHeight, 20, 20);
-  context.fillStyle = "gray";
-  context.fillRect((width * 2) / 4 - 10, obsBottomHeight, 20, 20);
-  context.fillStyle = "gray";
-  context.fillRect((width * 3) / 4 - 10, obsBottomHeight, 20, 20);
 }
 
 // Create Canvas Element
@@ -129,11 +115,11 @@ function ballMove() {
 // Determine What Ball Bounces Off, Score Points, Reset Ball
 function ballBoundaries() {
   // Bounce off Left Wall
-  if (ballX < 0 && speedX < 0) {
+  if (ballX <= 0 && speedX < 0) {
     speedX = -speedX;
   }
   // Bounce off Right Wall
-  if (ballX > width && speedX > 0) {
+  if (ballX >= width && speedX > 0) {
     speedX = -speedX;
   }
   // Bounce off player paddle (bottom)
@@ -158,25 +144,24 @@ function ballBoundaries() {
       computerScore++;
     }
   }
-  // Bounce off computer paddle (top)
-  if (ballY < paddleDiff) {
-    if (ballX > paddleTopX && ballX < paddleTopX + paddleWidth) {
-      // Add Speed on Hit
-      if (playerMoved) {
-        speedY += 1;
-        // Max Speed
-        if (speedY > 5) {
-          speedY = 5;
-        }
+}
+// Bounce off computer paddle (top)
+if (ballY < paddleDiff) {
+  if (ballX > paddleTopX && ballX < paddleTopX + paddleWidth) {
+    // Add Speed on Hit
+    if (playerMoved) {
+      speedY += 1;
+      // Max Speed
+      if (speedY > 5) {
+        speedY = 5;
       }
-      speedY = -speedY;
-    } else if (ballY < 0) {
-      // Reset Ball, add to Player Score
-      ballReset();
-      playerScore++;
     }
+    speedY = -speedY;
+  } else if (ballY < 0) {
+    // Reset Ball, add to Player Score
+    ballReset();
+    playerScore++;
   }
-  // Bounce off obstacles Top
 }
 
 // Computer Movement
@@ -258,15 +243,16 @@ function startGame() {
     canvas.style.cursor = "none";
   });
 
+  //keyboard controls
   document.addEventListener("keydown", keyDownHandler);
   function keyDownHandler(e) {
     if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
       playerMoved = true;
 
       if (e.key === "ArrowLeft") {
-        paddleBottomX += -10;
+        paddleBottomX += -15;
       } else if (e.key === "ArrowRight") {
-        paddleBottomX += 10;
+        paddleBottomX += 15;
       }
     }
   }
